@@ -1,3 +1,4 @@
+// A simple Java program to implement Game of Life
 public class GameOfLife
 {
     public static void main(String[] args)
@@ -88,7 +89,4 @@ public class GameOfLife
             System.out.println();
         }
     }
-    
-    static void futureGeneration (int grid [][], int M, int N){
-        grid [][];
 }
