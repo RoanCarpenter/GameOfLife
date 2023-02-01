@@ -1,27 +1,25 @@
-
 public class GoL{
 
     public static void main(String args[]){
-        int M = 10, N = 10;
+        int width = 9, length = 9;
 
-        int[][] grid = { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
-                { 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-            };
+        int[][] grid = { { 0, 1, 1, 0, 0,0,0,1,0},
+        {0,0,1,0,0,0,0,0,0},
+        {0,0,0,0,1,0,0,1,0},
+        {0,0,0,0,1,0,0,0,0},
+        {1,0,0,0,0,0,1,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,1,0,0},
+        {1,0,0,0,0,1,1,0,0},
+        {0,0,0,0,0,0,1,0,0},
+        };
 
-        System.out.println("Original Life");
-        for (int i=0; i<M; i++)
+        
+        for (int w=0; w<width; w++)
         {
-            for (int j = 0; j < N; j++) 
+            for (int l = 0; l< length; l++) 
             {    
-                if (grid[i][j] == 0) 
+                if (grid[w][l] == 0) 
                     System.out.print(".");
                 else 
                     System.out.print("#");
@@ -30,49 +28,50 @@ public class GoL{
         }
 
         System.out.println();
-        nextGeneration(grid,M,N);
+        nextGeneration(grid,width,length);
     }
 
-    static void nextGeneration(int grid [][], int M, int N) {
-        int[][] future = new int[M][N];
-        for (int k = 0; k < 5; k ++) {
-            for (int l = 0; l < M; l++)
+    static void nextGeneration(int grid [][], int width, int length) {
+        int[][] future = new int[width][length];
+        
+            for (int l = 0; l < width; l++)
             {
-                for (int m = 0; m < N; m++)
+                for (int w = 0; w < length; w++)
                 {
+                    //lines 38-43 from https://www.geeksforgeeks.org/program-for-conways-game-of-life/
                     int aliveNeighbours = 0;
                     for (int i = -1; i <= 1; i++)
                         for (int j = -1; j <= 1; j++)
-                            if ((l+i>=0 && l+i<M) && (m+j>=0 && m+j<N))
-                                aliveNeighbours += grid[l + i][m + j];
-                    aliveNeighbours -= grid[l][m];
+                            if ((l+i>=0 && l+i<width) && (w+j>=0 && w+j<length))
+                                aliveNeighbours += grid[l + i][w + j];
+                    aliveNeighbours -= grid[l][w];
 
-                    if ((grid[l][m] == 1) && (aliveNeighbours < 2))
-                        future[l][m] = 0;
+                    if ((grid[l][w] == 1) && (aliveNeighbours < 2))
+                        future[l][w] = 0;
 
-                    else if ((grid[l][m] == 1) && (aliveNeighbours > 3))
-                        future[l][m] = 0;
+                    else if ((grid[l][w] == 1) && (aliveNeighbours > 3))
+                        future[l][w] = 0;
 
-                    else if ((grid[l][m] == 0) && (aliveNeighbours == 3))
-                        future[l][m] = 1;
+                    else if ((grid[l][w] == 0) && (aliveNeighbours == 3))
+                        future[l][w] = 1;
 
                     else
-                        future[l][m] = grid[l][m];
+                        future[l][w] = grid[l][w];
                 }
             }
 
-            System.out.println("Next Generation");
-            for (int i = 0; i < M; i++)
+        
+            for (int o = 0; o < width; o++)
             {
-                for (int j = 0; j < N; j++)
+                for (int j = 0; j < length; j++)
                 {
-                    if (future[i][j] == 0)
+                    if (future[o][j] == 0)
                         System.out.print(".");
                     else
                         System.out.print("#");
                 }
                 System.out.println();
             }
-        }
+        
     }
 }

@@ -2,6 +2,6 @@
 comment0.target=GoL
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-comment2.params=grid\ M\ N
+comment2.params=grid\ width\ length
 comment2.target=void\ nextGeneration(int[][],\ int,\ int)
 numComments=3
